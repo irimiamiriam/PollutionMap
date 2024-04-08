@@ -42,8 +42,8 @@
             this.utilizatorLabel = new System.Windows.Forms.Label();
             this.hartaPictureBox = new System.Windows.Forms.PictureBox();
             this.Traseu = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.traseuPictureBox = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.VeziHarta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hartaPictureBox)).BeginInit();
@@ -58,7 +58,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1271, 753);
+            this.tabControl1.Size = new System.Drawing.Size(1883, 1248);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -77,7 +77,7 @@
             this.VeziHarta.Location = new System.Drawing.Point(8, 39);
             this.VeziHarta.Name = "VeziHarta";
             this.VeziHarta.Padding = new System.Windows.Forms.Padding(3);
-            this.VeziHarta.Size = new System.Drawing.Size(1255, 706);
+            this.VeziHarta.Size = new System.Drawing.Size(1867, 1201);
             this.VeziHarta.TabIndex = 0;
             this.VeziHarta.Text = "Harta";
             this.VeziHarta.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             // 
             this.hartaPictureBox.Location = new System.Drawing.Point(582, 112);
             this.hartaPictureBox.Name = "hartaPictureBox";
-            this.hartaPictureBox.Size = new System.Drawing.Size(640, 480);
+            this.hartaPictureBox.Size = new System.Drawing.Size(1260, 1068);
             this.hartaPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.hartaPictureBox.TabIndex = 0;
             this.hartaPictureBox.TabStop = false;
@@ -180,20 +180,10 @@
             this.Traseu.Location = new System.Drawing.Point(8, 39);
             this.Traseu.Name = "Traseu";
             this.Traseu.Padding = new System.Windows.Forms.Padding(3);
-            this.Traseu.Size = new System.Drawing.Size(1255, 706);
+            this.Traseu.Size = new System.Drawing.Size(1793, 1201);
             this.Traseu.TabIndex = 1;
             this.Traseu.Text = "Traseu";
             this.Traseu.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(928, 62);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(305, 245);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // traseuPictureBox
             // 
@@ -205,11 +195,22 @@
             this.traseuPictureBox.TabStop = false;
             this.traseuPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.traseuPictureBox_MouseDown);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1453, 14);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(305, 245);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
             // Vizualizare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1283, 767);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1907, 1272);
             this.Controls.Add(this.tabControl1);
             this.Name = "Vizualizare";
             this.Text = "Vizualizare";

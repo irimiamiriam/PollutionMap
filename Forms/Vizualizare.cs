@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,6 +36,10 @@ namespace PollutionMap.Forms
             HartiFolderPath = projectDirectory + @"\Resurse\Harti\";
 
             hartaPictureBox.Image = Image.FromFile(HartiFolderPath + "default_harta.png");
+            hartaPictureBox.Height = 480;
+            hartaPictureBox.Width = 640;
+            traseuPictureBox.Height = 480;
+            traseuPictureBox.Width = 640;
             original = hartaPictureBox.Image;
             
             utilizatorLabel.Text = "Utilizator: " + user.Nume;
@@ -59,21 +64,21 @@ namespace PollutionMap.Forms
 
         }
 
-        private void hartiComboBox_SelectedIndexChanged(object sender, EventArgs e)
+       private void hartiComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selected = hartiComboBox.SelectedItem.ToString().Trim();
+         string selected = hartiComboBox.SelectedItem.ToString().Trim();
 
-            HartaModel element = imagini.Find(el => el.Name.Trim() == selected);
+         HartaModel element = imagini.Find(el => el.Name.Trim() == selected);
 
-            original = Image.FromFile(HartiFolderPath + element.Fisier);
-            hartaPictureBox.Image = Image.FromFile(HartiFolderPath + element.Fisier);
-            selectedItem = element.Id;
+          original = Image.FromFile(HartiFolderPath + element.Fisier);
+          hartaPictureBox.Image = Image.FromFile(HartiFolderPath + element.Fisier);
+          selectedItem = element.Id;
 
         }
 
         private void filtrareButton_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(hartaPictureBox.Width, hartaPictureBox.Width);    
+            Bitmap bmp = new Bitmap(hartaPictureBox.Width, hartaPictureBox.Height);    
 
             Graphics graphics = Graphics.FromImage(bmp);
             graphics.DrawImage(original,0,0,bmp.Width,bmp.Height);  
@@ -220,7 +225,7 @@ namespace PollutionMap.Forms
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex==1)
+            if(tabControl1.SelectedIndex==1&&masuratori!=null)
             {
                 Bitmap bmp = new Bitmap(hartaPictureBox.Image);
                 Graphics graphics = Graphics.FromImage(bmp);
@@ -267,17 +272,28 @@ namespace PollutionMap.Forms
                 }
             }
 
-            if(elem != null && elem.Valoare >=40) {
+            if(elem != null && elem.Valoare >40) {
                 
-                  var orderedMasuratori = masuratori.OrderByDescending(el => el.Valoare).ToList();
+                var orderedMasuratori = masuratori.OrderByDescending(el => el.Valoare).ToList();
                 Bitmap bmp = new Bitmap(traseuPictureBox.Image);
                 Graphics graphics = Graphics.FromImage(bmp);
                 Pen pen = new Pen(Color.Red);
                 int v= orderedMasuratori[0].Valoare;
-                graphics.DrawLine(pen, clickedPoint.X, clickedPoint.Y, orderedMasuratori[0].PozitieX, orderedMasuratori[0].PozitieY);
+                double distance1 = Math.Sqrt((clickedPoint.X - orderedMasuratori[0].PozitieX) * (clickedPoint.X - orderedMasuratori[0].PozitieX) + (clickedPoint.Y - orderedMasuratori[0].PozitieY) * (clickedPoint.Y - orderedMasuratori[0].PozitieY));
+                double distance2 = Math.Sqrt((clickedPoint.X - orderedMasuratori[1].PozitieX) * (clickedPoint.X - orderedMasuratori[1].PozitieX) + (clickedPoint.Y - orderedMasuratori[1].PozitieY) * (clickedPoint.Y - orderedMasuratori[1].PozitieY));
+                if (distance1 < distance2)
+                {
+                    graphics.DrawLine(pen, clickedPoint.X, clickedPoint.Y, orderedMasuratori[0].PozitieX, orderedMasuratori[0].PozitieY);
+                    graphics.DrawLine(pen, orderedMasuratori[0].PozitieX, orderedMasuratori[0].PozitieY, orderedMasuratori[1].PozitieX, orderedMasuratori[1].PozitieY);
+                }
+                else
+                {
+                    graphics.DrawLine(pen, clickedPoint.X, clickedPoint.Y, orderedMasuratori[1].PozitieX, orderedMasuratori[1].PozitieY);
+                    graphics.DrawLine(pen, orderedMasuratori[1].PozitieX, orderedMasuratori[1].PozitieY, orderedMasuratori[0].PozitieX, orderedMasuratori[0].PozitieY);
+                
+
+            }
                 traseuPictureBox.Image=bmp;
-
-
             }
             else   MessageBox.Show("Selectați un punct de pe hartă corespunzător unei măsurări existente în baza de date!");
 

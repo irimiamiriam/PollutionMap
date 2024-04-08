@@ -23,9 +23,9 @@ namespace PollutionMap.Forms
         private void Autentificare_Load(object sender, EventArgs e)
         {
             DataBaseHelper.Initialisation();
-            numeTextBox.Text = "oti2022";
-            parolaTextBox.Text = "oti1234";
-;
+         numeTextBox.Text = "oti2022";
+          parolaTextBox.Text = "oti1234";
+
         }
 
         private void singUpButton_Click(object sender, EventArgs e)
